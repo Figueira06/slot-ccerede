@@ -29,7 +29,19 @@ const msg={
   "🚬":"Tabaco 🚬 — +351 931 394 761",
   "☠️":"Caveira ☠️ — MEIO SHOT NO BODA"
 };
-const prob=[0.506,0.18,0.15,0.08,0.06,0.02,0.004];
+
+/* probabilidades: 6 símbolos normais = igual, macaco = jackpot */
+const normalProb = (1 - 0.004) / 6;   // 0,166 ̅
+const prob=[
+  normalProb,   // 🔥
+  normalProb,   // 🍺
+  normalProb,   // 😎
+  normalProb,   // 🐤
+  normalProb,   // 🚬
+  normalProb,   // ☠️
+  0.004         // 🐒  (jackpot)
+];
+
 function choose(){
   const r=Math.random(); let acc=0;
   for(let i=0;i<prob.length;i++){acc+=prob[i];if(r<=acc)return symbols[i]}

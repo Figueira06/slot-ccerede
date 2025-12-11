@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
   body{font-family:system-ui;background:#111;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh}
-  #slot{font-size:3em;margin:.3em}
+  #slot{font-size:2.3em;margin:.4em;text-align:center;min-height:1.4em}
   button{font-size:1.3em;padding:.6em 1.2em;border:none;border-radius:8px;background:#096;color:#fff;cursor:pointer}
   button:disabled{background:#444}
   #msg{height:1.4em;margin-top:.6em;font-weight:700}
@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<div id="slot">│   │   │   │</div>
+<div id="slot">MAS VAIS GIRAR, OU GOSTAS DE HOMENS?</div>
 <button id="spin">GIRAR</button>
 <div id="msg"></div>
 
@@ -29,12 +29,9 @@ const msg={
   "🚬":"Tabaco 🚬 — +351 931 394 761",
   "☠️":"Caveira ☠️ — MEIO SHOT NO BODA"
 };
-const prob=[      // ordem conforme symbols
-  0.506,0.18,0.15,0.08,0.06,0.02,0.004
-];
+const prob=[0.506,0.18,0.15,0.08,0.06,0.02,0.004];
 function choose(){
-  const r=Math.random();
-  let acc=0;
+  const r=Math.random(); let acc=0;
   for(let i=0;i<prob.length;i++){acc+=prob[i];if(r<=acc)return symbols[i]}
   return "🔥";
 }
@@ -54,6 +51,7 @@ async function anim(final,dur){
 }
 
 btn.onclick=async()=>{
+  if(slot.textContent.includes('GOSTAS DE HOMENS')) slot.textContent='│   │   │   │';
   btn.disabled=true; info.textContent='';
   const f1=choose(),f2=choose(),f3=choose();
   await Promise.all([
